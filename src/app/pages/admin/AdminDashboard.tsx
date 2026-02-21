@@ -2,22 +2,18 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../../components/design-system/Card';
 import { Badge } from '../../components/design-system/Badge';
-import { 
-  UserCheck, 
-  Wallet, 
-  FileCheck, 
-  Shield, 
-  Flag,
+import {
+  UserCheck,
+  Wallet,
+  FileCheck,
+  Clock,
   Users,
   TrendingUp,
-  Clock
 } from 'lucide-react';
-import { 
-  registrations, 
-  payments, 
-  letterRequests, 
-  whiteningRequests, 
-  forumReports 
+import {
+  registrations,
+  payments,
+  letterRequests,
 } from '../../lib/mock-data';
 
 export function AdminDashboard() {
@@ -54,9 +50,11 @@ export function AdminDashboard() {
     },
   ];
 
+  // Hanya 3 antrian sesuai DOKUMENTASI.md
   const queues = [
     {
       title: 'Verifikasi Pendaftaran',
+      description: 'Pendaftaran anggota baru menunggu verifikasi',
       count: registrations.length,
       icon: UserCheck,
       path: '/admin/verifikasi-pendaftaran',
@@ -64,6 +62,7 @@ export function AdminDashboard() {
     },
     {
       title: 'Validasi Pembayaran',
+      description: 'Bukti pembayaran menunggu validasi',
       count: payments.length,
       icon: Wallet,
       path: '/admin/validasi-pembayaran',
@@ -71,24 +70,11 @@ export function AdminDashboard() {
     },
     {
       title: 'Validasi Surat',
+      description: 'Pengajuan surat menunggu persetujuan',
       count: letterRequests.length,
       icon: FileCheck,
       path: '/admin/validasi-surat',
       color: 'text-purple-600 bg-purple-50',
-    },
-    {
-      title: 'Tinjau Pemutihan',
-      count: whiteningRequests.length,
-      icon: Shield,
-      path: '/admin/tinjau-pemutihan',
-      color: 'text-yellow-600 bg-yellow-50',
-    },
-    {
-      title: 'Laporan Forum',
-      count: forumReports.length,
-      icon: Flag,
-      path: '/admin/moderasi-forum',
-      color: 'text-red-600 bg-red-50',
     },
   ];
 
@@ -122,32 +108,33 @@ export function AdminDashboard() {
         })}
       </div>
 
-      {/* Queues */}
+      {/* Antrian Operasional — 3 antrian sesuai DOKUMENTASI.md */}
       <Card>
         <CardHeader>
           <CardTitle>Antrian Operasional</CardTitle>
           <CardDescription>Item yang memerlukan tindakan admin</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             {queues.map((queue, index) => {
               const Icon = queue.icon;
               return (
                 <button
                   key={index}
                   onClick={() => navigate(queue.path)}
-                  className="text-left p-4 rounded-lg border border-border hover:border-accent hover:shadow-md transition-all"
+                  className="text-left p-5 rounded-lg border border-border hover:border-accent hover:shadow-md transition-all group"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <div className={`h-10 w-10 rounded-lg ${queue.color} flex items-center justify-center`}>
-                      <Icon className="h-5 w-5" />
+                    <div className={`h-12 w-12 rounded-xl ${queue.color} flex items-center justify-center`}>
+                      <Icon className="h-6 w-6" />
                     </div>
                     <Badge variant={queue.count > 0 ? 'pending' : 'default'}>
                       {queue.count}
                     </Badge>
                   </div>
-                  <h3 className="font-medium mb-1">{queue.title}</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold mb-1 group-hover:text-accent transition-colors">{queue.title}</h3>
+                  <p className="text-sm text-muted-foreground">{queue.description}</p>
+                  <p className="text-xs mt-2 font-medium text-muted-foreground">
                     {queue.count > 0 ? `${queue.count} item menunggu` : 'Tidak ada item'}
                   </p>
                 </button>
@@ -157,26 +144,26 @@ export function AdminDashboard() {
         </CardContent>
       </Card>
 
-      {/* Recent Activity */}
+      {/* Aktivitas Terbaru */}
       <Card>
         <CardHeader>
           <CardTitle>Aktivitas Terbaru</CardTitle>
-          <CardDescription>Riwayat aktivitas sistem</CardDescription>
+          <CardDescription>Riwayat tindakan operasional sistem</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
             {[
-              { action: 'Pendaftaran baru dari Dewi Kartika', time: '5 menit yang lalu', type: 'new' },
-              { action: 'Pembayaran divalidasi untuk Andi Wijaya', time: '1 jam yang lalu', type: 'success' },
-              { action: 'Surat rekomendasi disetujui untuk Budi Santoso', time: '2 jam yang lalu', type: 'success' },
-              { action: 'Laporan forum baru', time: '3 jam yang lalu', type: 'warning' },
+              { action: 'Pendaftaran baru dari Dewi Kartika diverifikasi', time: '5 menit yang lalu', type: 'success' },
+              { action: 'Pembayaran Andi Wijaya (12 bulan) divalidasi', time: '1 jam yang lalu', type: 'success' },
+              { action: 'Surat rekomendasi Budi Santoso disetujui', time: '2 jam yang lalu', type: 'success' },
+              { action: 'Pendaftaran baru masuk dari Rina Kusuma', time: '3 jam yang lalu', type: 'new' },
+              { action: 'Pengajuan surat Hendra Gunawan ditolak', time: '4 jam yang lalu', type: 'warning' },
             ].map((activity, index) => (
               <div key={index} className="flex items-center gap-3 py-2 border-b border-border last:border-0">
-                <div className={`h-2 w-2 rounded-full ${
+                <div className={`h-2 w-2 rounded-full flex-shrink-0 ${activity.type === 'success' ? 'bg-green-500' :
                   activity.type === 'new' ? 'bg-blue-500' :
-                  activity.type === 'success' ? 'bg-green-500' :
-                  'bg-yellow-500'
-                }`} />
+                    'bg-yellow-500'
+                  }`} />
                 <div className="flex-1">
                   <p className="text-sm">{activity.action}</p>
                   <p className="text-xs text-muted-foreground">{activity.time}</p>

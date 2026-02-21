@@ -5,14 +5,14 @@ import { Button } from '../../components/design-system/Button';
 import { Badge, getStatusBadgeVariant, getStatusLabel } from '../../components/design-system/Badge';
 import { Alert } from '../../components/design-system/Alert';
 import { useAuth } from '../../lib/auth-context';
-import { 
-  CreditCard, 
-  FileText, 
-  User, 
+import {
+  CreditCard,
+  FileText,
+  User,
   Upload,
   Calendar,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
 
 export function MemberDashboard() {
@@ -21,15 +21,19 @@ export function MemberDashboard() {
 
   if (!user) return null;
 
+  // Sesuai DOKUMENTASI.md: Status Keanggotaan = AKTIF / NONAKTIF
   const isActive = user.memberStatus === 'AKTIF';
   const isPending = user.memberStatus === 'MENUNGGU_VERIFIKASI';
   const isInactive = user.memberStatus === 'NONAKTIF' || user.memberStatus === 'KEDALUWARSA';
 
-  // Calculate days until expiry
-  const daysUntilExpiry = user.membershipExpiry 
+  const daysUntilExpiry = user.membershipExpiry
     ? Math.floor((new Date(user.membershipExpiry).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
     : null;
 
+  // Aksi Cepat — sesuai DOKUMENTASI.md
+  // - Perpanjang: aktif selama bukan MENUNGGU_VERIFIKASI
+  // - Ajukan Surat: hanya jika memberStatus = AKTIF
+  // - Profil: selalu aktif
   const quickActions = [
     {
       icon: CreditCard,
@@ -68,10 +72,10 @@ export function MemberDashboard() {
         <p className="text-muted-foreground mt-1">Selamat datang, {user.name}</p>
       </div>
 
-      {/* Status Alerts */}
+      {/* Alert Status */}
       {isPending && (
         <Alert variant="warning" title="Pendaftaran Menunggu Verifikasi">
-          Akun Anda sedang dalam proses verifikasi oleh admin. Anda akan mendapat notifikasi melalui email setelah verifikasi selesai.
+          Akun Anda sedang diverifikasi oleh admin. Status akan diperbarui setelah verifikasi selesai.
         </Alert>
       )}
 
@@ -84,9 +88,9 @@ export function MemberDashboard() {
         </Alert>
       )}
 
-      {isActive && daysUntilExpiry && daysUntilExpiry <= 30 && (
+      {isActive && daysUntilExpiry !== null && daysUntilExpiry <= 30 && (
         <Alert variant="warning" title="Keanggotaan Akan Berakhir">
-          Keanggotaan Anda akan berakhir dalam {daysUntilExpiry} hari ({user.membershipExpiry}). 
+          Keanggotaan Anda akan berakhir dalam {daysUntilExpiry} hari ({user.membershipExpiry}).
           Perpanjang sekarang untuk menghindari gangguan layanan.
           <Button className="mt-3" size="sm" variant="accent" onClick={() => navigate('/anggota/perpanjang')}>
             Perpanjang Sekarang
@@ -94,13 +98,13 @@ export function MemberDashboard() {
         </Alert>
       )}
 
-      {/* Membership Status Card */}
+      {/* Status Keanggotaan — DOKUMENTASI.md: AKTIF / NONAKTIF */}
       <Card>
         <CardHeader>
           <div className="flex items-start justify-between">
             <div>
               <CardTitle>Status Keanggotaan</CardTitle>
-              <CardDescription>Informasi keanggotaan Anda</CardDescription>
+              <CardDescription>Informasi keanggotaan Anda saat ini</CardDescription>
             </div>
             <Badge variant={getStatusBadgeVariant(user.memberStatus || '')}>
               {getStatusLabel(user.memberStatus || '')}
@@ -130,7 +134,7 @@ export function MemberDashboard() {
                     {new Date(user.membershipExpiry).toLocaleDateString('id-ID', {
                       year: 'numeric',
                       month: 'long',
-                      day: 'numeric'
+                      day: 'numeric',
                     })}
                   </p>
                 </div>
@@ -148,7 +152,7 @@ export function MemberDashboard() {
                     {new Date(user.registrationDate).toLocaleDateString('id-ID', {
                       year: 'numeric',
                       month: 'long',
-                      day: 'numeric'
+                      day: 'numeric',
                     })}
                   </p>
                 </div>
@@ -158,14 +162,14 @@ export function MemberDashboard() {
         </CardContent>
       </Card>
 
-      {/* Quick Actions */}
+      {/* Aksi Cepat */}
       <div>
         <h2 className="text-xl font-semibold mb-4">Aksi Cepat</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickActions.map((action, index) => {
             const Icon = action.icon;
             return (
-              <Card 
+              <Card
                 key={index}
                 className={action.disabled ? 'opacity-50' : 'hover:shadow-md transition-shadow cursor-pointer'}
                 onClick={action.disabled ? undefined : action.onClick}
@@ -179,7 +183,11 @@ export function MemberDashboard() {
                   {action.disabled && (
                     <div className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
                       <AlertCircle className="h-3 w-3" />
-                      <span>Tidak tersedia</span>
+                      <span>
+                        {action.title === 'Ajukan Surat'
+                          ? 'Perlu keanggotaan AKTIF'
+                          : 'Tidak tersedia'}
+                      </span>
                     </div>
                   )}
                 </CardContent>
@@ -189,16 +197,50 @@ export function MemberDashboard() {
         </div>
       </div>
 
-      {/* Recent Activities - Placeholder */}
+      {/* Ringkasan Pengajuan Surat */}
       <Card>
         <CardHeader>
-          <CardTitle>Aktivitas Terbaru</CardTitle>
-          <CardDescription>Riwayat aktivitas Anda di ITLA Pusat</CardDescription>
+          <CardTitle>Ringkasan Pengajuan Surat</CardTitle>
+          <CardDescription>Status pengajuan surat Anda</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-muted-foreground">
-            <p>Belum ada aktivitas</p>
-          </div>
+          {isActive ? (
+            <div className="space-y-3">
+              {/* Mock data ringkasan pengajuan */}
+              <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+                <div className="flex items-center gap-3">
+                  <FileText className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Surat Rekomendasi Visa</p>
+                    <p className="text-xs text-muted-foreground">Diajukan: 20 Feb 2026</p>
+                  </div>
+                </div>
+                <Badge variant="pending">Diajukan</Badge>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full"
+                onClick={() => navigate('/anggota/ajukan-surat')}
+              >
+                Lihat Semua Pengajuan
+              </Button>
+            </div>
+          ) : (
+            <div className="text-center py-8 text-muted-foreground">
+              <FileText className="h-10 w-10 mx-auto mb-3 opacity-40" />
+              <p className="text-sm">Ajukan surat tersedia untuk anggota AKTIF</p>
+              {!isPending && (
+                <Button
+                  size="sm"
+                  className="mt-3"
+                  onClick={() => navigate('/anggota/perpanjang')}
+                >
+                  Aktifkan Keanggotaan
+                </Button>
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

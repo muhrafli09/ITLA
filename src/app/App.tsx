@@ -1,6 +1,11 @@
+import { RouterProvider } from 'react-router';
+import { AuthProvider } from './lib/auth-context';
+import { router } from './routes';
+
 export default function App() {
   return (
-    <div className="size-full flex items-center justify-center">
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }

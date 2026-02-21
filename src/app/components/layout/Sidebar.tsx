@@ -1,22 +1,18 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
-import { 
-  LayoutDashboard, 
-  CheckCircle, 
-  User, 
-  FileText, 
-  CreditCard, 
-  Users, 
-  MessageSquare, 
+import {
+  LayoutDashboard,
+  CheckCircle,
+  User,
+  FileText,
+  CreditCard,
   Bell,
   LogOut,
   UserCheck,
   Wallet,
   FileCheck,
-  Shield,
-  Flag,
   Settings,
-  Megaphone
+  Users,
 } from 'lucide-react';
 import { useAuth } from '../../lib/auth-context';
 import { Button } from '../design-system/Button';
@@ -31,27 +27,24 @@ export function Sidebar({ type }: SidebarProps) {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
+  // Anggota: Dashboard, Pusat Status, Profil, Ajukan Surat, Perpanjang, Pengumuman
   const memberLinks = [
     { to: '/anggota', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/anggota/pusat-status', icon: CheckCircle, label: 'Pusat Status' },
     { to: '/anggota/profil', icon: User, label: 'Profil' },
     { to: '/anggota/ajukan-surat', icon: FileText, label: 'Ajukan Surat' },
     { to: '/anggota/perpanjang', icon: CreditCard, label: 'Perpanjang' },
-    { to: '/anggota/pemutihan', icon: Wallet, label: 'Pemutihan' },
-    { to: '/anggota/direktori', icon: Users, label: 'Direktori Anggota' },
-    { to: '/anggota/forum', icon: MessageSquare, label: 'Forum' },
     { to: '/anggota/pengumuman', icon: Bell, label: 'Pengumuman' },
   ];
 
+  // Admin: Dashboard, Verifikasi Pendaftaran, Validasi Pembayaran, Validasi Surat, Kelola Konten
   const adminLinks = [
     { to: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/admin/verifikasi-pendaftaran', icon: UserCheck, label: 'Verifikasi Pendaftaran' },
     { to: '/admin/validasi-pembayaran', icon: Wallet, label: 'Validasi Pembayaran' },
     { to: '/admin/validasi-surat', icon: FileCheck, label: 'Validasi Surat' },
-    { to: '/admin/tinjau-pemutihan', icon: Shield, label: 'Tinjau Pemutihan' },
-    { to: '/admin/moderasi-forum', icon: Flag, label: 'Moderasi Forum' },
+    { to: '/admin/kelola-anggota', icon: Users, label: 'Kelola Anggota' },
     { to: '/admin/kelola-konten', icon: Settings, label: 'Kelola Konten' },
-    { to: '/admin/kelola-pengumuman', icon: Megaphone, label: 'Kelola Pengumuman' },
   ];
 
   const links = type === 'member' ? memberLinks : adminLinks;
