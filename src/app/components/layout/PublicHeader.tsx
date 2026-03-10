@@ -16,9 +16,7 @@ export function PublicHeader() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-sm group-hover:bg-primary/90 transition-colors">
-              I
-            </div>
+            <img src="/logo.png" alt="ITLA Logo" className="h-10 w-auto" />
             <span className="font-bold text-lg tracking-tight text-slate-900 group-hover:text-primary transition-colors">ITLA Pusat</span>
           </Link>
 
@@ -51,14 +49,9 @@ export function PublicHeader() {
                 {user.role === 'admin' ? 'Dashboard Admin' : 'Dashboard Anggota'}
               </Button>
             ) : (
-              <>
-                <Button variant="outline" size="sm" onClick={() => navigate('/masuk')} className="font-medium hover:bg-slate-50 border-slate-200 text-slate-700">
-                  Masuk Sistem
-                </Button>
-                <Button size="sm" onClick={() => navigate('/daftar')} className="shadow-sm font-semibold hover:-translate-y-0.5 transition-transform bg-primary px-5">
-                  Daftar Anggota
-                </Button>
-              </>
+              <Button size="sm" onClick={() => navigate('/daftar')} className="shadow-sm font-semibold hover:-translate-y-0.5 transition-transform bg-primary px-5">
+                Daftar Anggota
+              </Button>
             )}
           </div>
         </div>

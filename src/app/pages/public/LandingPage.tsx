@@ -56,6 +56,9 @@ export function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-left space-y-8">
+              <div className="flex items-center gap-4 mb-6">
+                <img src="/logo.png" alt="ITLA Logo" className="h-16 w-auto" />
+              </div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
                 <span>Integrity – Transparency – Loyalty – Accountability</span>
               </div>
@@ -78,14 +81,6 @@ export function LandingPage() {
                 >
                   Daftar Anggota
                   <ArrowRight className="h-5 w-5 ml-2" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-14 px-8 text-base font-medium border-slate-300 text-slate-700 hover:bg-slate-50 transition-all hover:text-primary"
-                  onClick={() => navigate('/masuk')}
-                >
-                  Masuk Ke Akun
                 </Button>
               </div>
 
@@ -289,9 +284,7 @@ export function LandingPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-6">
-                <div className="flex items-center justify-center w-10 h-10 bg-white text-primary rounded-xl font-bold text-xl shadow-lg">
-                  I
-                </div>
+                <img src="/logo.png" alt="ITLA Logo" className="h-12 w-auto" />
                 <h4 className="font-bold text-xl tracking-tight">ITLA Pusat</h4>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed max-w-xs">

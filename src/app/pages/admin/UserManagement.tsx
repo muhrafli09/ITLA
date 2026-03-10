@@ -3,16 +3,41 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../..
 import { Button } from '../../components/design-system/Button';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/design-system/Table';
 import { Badge } from '../../components/design-system/Badge';
-import { Search, Filter, Mail, UserMinus, UserPlus, MoreVertical } from 'lucide-react';
+import { Search, Filter, Mail, UserMinus, UserPlus, MoreVertical, Edit, Trash2, X } from 'lucide-react';
 import { Input } from '../../components/design-system/Input';
 
 export function UserManagement() {
-    const [users] = useState([
+    const [users, setUsers] = useState([
         { id: '1', name: 'Andi Wijaya', email: 'andi@example.com', role: 'Anggota', status: 'Active', joined: '2025-10-12' },
         { id: '2', name: 'Dewi Kartika', email: 'dewi@example.com', role: 'Anggota', status: 'Pending', joined: '2026-02-21' },
         { id: '3', name: 'Budi Santoso', email: 'budi@example.com', role: 'Admin', status: 'Active', joined: '2024-05-15' },
         { id: '4', name: 'Siti Aminah', email: 'siti@example.com', role: 'Anggota', status: 'Expired', joined: '2023-11-20' },
     ]);
+
+    const [selectedUser, setSelectedUser] = useState<typeof users[0] | null>(null);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+    const [editForm, setEditForm] = useState({ name: '', email: '', role: '', status: '' });
+
+    const handleEdit = (user: typeof users[0]) => {
+        setSelectedUser(user);
+        setEditForm({ name: user.name, email: user.email, role: user.role, status: user.status });
+        setIsEditOpen(true);
+    };
+
+    const handleSaveEdit = () => {
+        if (selectedUser) {
+            setUsers(users.map(u => u.id === selectedUser.id ? { ...u, ...editForm } : u));
+            setIsEditOpen(false);
+            alert('Data pengguna berhasil diperbarui!');
+        }
+    };
+
+    const handleDelete = (userId: string) => {
+        if (confirm('Apakah Anda yakin ingin menghapus pengguna ini?')) {
+            setUsers(users.filter(u => u.id !== userId));
+            alert('Pengguna berhasil dihapus!');
+        }
+    };
 
     return (
         <div className="space-y-6">
@@ -91,14 +116,11 @@ export function UserManagement() {
                                     <TableCell>{user.joined}</TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex justify-end gap-2">
-                                            <Button variant="ghost" size="icon" title="Kirim Pesan">
-                                                <Mail className="h-4 w-4" />
+                                            <Button variant="ghost" size="icon" title="Edit" onClick={() => handleEdit(user)}>
+                                                <Edit className="h-4 w-4" />
                                             </Button>
-                                            <Button variant="ghost" size="icon" className="text-destructive" title="Nonaktifkan">
-                                                <UserMinus className="h-4 w-4" />
-                                            </Button>
-                                            <Button variant="ghost" size="icon">
-                                                <MoreVertical className="h-4 w-4" />
+                                            <Button variant="ghost" size="icon" className="text-destructive" title="Hapus" onClick={() => handleDelete(user.id)}>
+                                                <Trash2 className="h-4 w-4" />
                                             </Button>
                                         </div>
                                     </TableCell>
@@ -108,6 +130,63 @@ export function UserManagement() {
                     </Table>
                 </CardContent>
             </Card>
+
+            {isEditOpen && selectedUser && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <Card className="w-full max-w-md">
+                        <CardHeader className="flex flex-row items-center justify-between">
+                            <CardTitle>Edit Pengguna</CardTitle>
+                            <Button variant="ghost" size="icon" onClick={() => setIsEditOpen(false)}>
+                                <X className="h-4 w-4" />
+                            </Button>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <Input
+                                label="Nama"
+                                value={editForm.name}
+                                onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                            />
+                            <Input
+                                label="Email"
+                                type="email"
+                                value={editForm.email}
+                                onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                            />
+                            <div>
+                                <label className="text-sm font-medium mb-1.5 block">Role</label>
+                                <select
+                                    value={editForm.role}
+                                    onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
+                                    className="w-full p-2 border border-border rounded-md bg-transparent"
+                                >
+                                    <option>Anggota</option>
+                                    <option>Admin</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="text-sm font-medium mb-1.5 block">Status</label>
+                                <select
+                                    value={editForm.status}
+                                    onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                                    className="w-full p-2 border border-border rounded-md bg-transparent"
+                                >
+                                    <option>Active</option>
+                                    <option>Pending</option>
+                                    <option>Expired</option>
+                                </select>
+                            </div>
+                            <div className="flex gap-2">
+                                <Button variant="outline" className="flex-1" onClick={() => setIsEditOpen(false)}>
+                                    Batal
+                                </Button>
+                                <Button className="flex-1" onClick={handleSaveEdit}>
+                                    Simpan
+                                </Button>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </div>
+            )}
         </div>
     );
 }

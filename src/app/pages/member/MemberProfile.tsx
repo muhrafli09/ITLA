@@ -132,8 +132,25 @@ export function MemberProfile() {
           <CardTitle>Keamanan</CardTitle>
           <CardDescription>Kelola kata sandi dan keamanan akun</CardDescription>
         </CardHeader>
-        <CardContent>
-          <Button variant="outline">Ubah Kata Sandi</Button>
+        <CardContent className="space-y-4">
+          <div className="space-y-4">
+            <Input
+              label="Kata Sandi Lama"
+              type="password"
+              placeholder="Masukkan kata sandi lama"
+            />
+            <Input
+              label="Kata Sandi Baru"
+              type="password"
+              placeholder="Masukkan kata sandi baru"
+            />
+            <Input
+              label="Konfirmasi Kata Sandi"
+              type="password"
+              placeholder="Konfirmasi kata sandi baru"
+            />
+            <Button onClick={() => alert('Kata sandi berhasil diubah!')}>Simpan Kata Sandi Baru</Button>
+          </div>
         </CardContent>
       </Card>
     </div>

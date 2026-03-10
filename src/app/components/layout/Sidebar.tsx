@@ -13,6 +13,7 @@ import {
   FileCheck,
   Settings,
   Users,
+  MessageSquare,
 } from 'lucide-react';
 import { useAuth } from '../../lib/auth-context';
 import { Button } from '../design-system/Button';
@@ -27,7 +28,6 @@ export function Sidebar({ type }: SidebarProps) {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-  // Anggota: Dashboard, Pusat Status, Profil, Ajukan Surat, Perpanjang, Pengumuman
   const memberLinks = [
     { to: '/anggota', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/anggota/pusat-status', icon: CheckCircle, label: 'Pusat Status' },
@@ -35,9 +35,9 @@ export function Sidebar({ type }: SidebarProps) {
     { to: '/anggota/ajukan-surat', icon: FileText, label: 'Ajukan Surat' },
     { to: '/anggota/perpanjang', icon: CreditCard, label: 'Perpanjang' },
     { to: '/anggota/pengumuman', icon: Bell, label: 'Pengumuman' },
+    { to: '/anggota/forum', icon: MessageSquare, label: 'Forum Diskusi' },
   ];
 
-  // Admin: Dashboard, Verifikasi Pendaftaran, Validasi Pembayaran, Validasi Surat, Kelola Konten
   const adminLinks = [
     { to: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/admin/verifikasi-pendaftaran', icon: UserCheck, label: 'Verifikasi Pendaftaran' },
@@ -45,6 +45,7 @@ export function Sidebar({ type }: SidebarProps) {
     { to: '/admin/validasi-surat', icon: FileCheck, label: 'Validasi Surat' },
     { to: '/admin/kelola-anggota', icon: Users, label: 'Kelola Anggota' },
     { to: '/admin/kelola-konten', icon: Settings, label: 'Kelola Konten' },
+    { to: '/admin/moderasi-forum', icon: MessageSquare, label: 'Moderasi Forum' },
   ];
 
   const links = type === 'member' ? memberLinks : adminLinks;
@@ -59,9 +60,7 @@ export function Sidebar({ type }: SidebarProps) {
       {/* Logo */}
       <div className="p-6 border-b border-sidebar-border">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-sidebar-primary flex items-center justify-center text-sidebar-primary-foreground font-bold">
-            I
-          </div>
+          <img src="/logo.png" alt="ITLA Logo" className="h-8 w-auto" />
           <div className="flex flex-col">
             <span className="font-semibold">ITLA Pusat</span>
             <span className="text-xs text-sidebar-foreground/70">
