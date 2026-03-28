@@ -4,6 +4,8 @@ import { Input, Textarea } from '../../components/design-system/Input';
 import { Button } from '../../components/design-system/Button';
 import { Alert } from '../../components/design-system/Alert';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { FadeIn } from '../../components/ui/FadeIn';
+import { AnimatedCard } from '../../components/ui/AnimatedCard';
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -27,20 +29,20 @@ export function ContactPage() {
   return (
     <div className="min-h-screen bg-secondary py-12 px-4">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Hubungi Kami</h1>
-          <p className="text-muted-foreground">
+        <FadeIn delay={100} direction="up" className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4 animate-in fade-in duration-700">Hubungi Kami</h1>
+          <p className="text-muted-foreground animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
             Ada pertanyaan? Kami siap membantu Anda
           </p>
-        </div>
+        </FadeIn>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Contact Info */}
           <div className="space-y-4">
-            <Card>
+            <AnimatedCard delay={100} direction="up" className="hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
@@ -50,12 +52,12 @@ export function ContactPage() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </AnimatedCard>
 
-            <Card>
+            <AnimatedCard delay={200} direction="up" className="hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
@@ -65,12 +67,12 @@ export function ContactPage() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </AnimatedCard>
 
-            <Card>
+            <AnimatedCard delay={300} direction="up" className="hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
@@ -83,12 +85,12 @@ export function ContactPage() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </AnimatedCard>
 
-            <Card>
+            <AnimatedCard delay={400} direction="up" className="hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
@@ -100,21 +102,21 @@ export function ContactPage() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </AnimatedCard>
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card>
+          <FadeIn delay={200} direction="up" className="lg:col-span-2">
+            <AnimatedCard className="hover:shadow-lg transition-all">
               <CardHeader>
-                <CardTitle>Kirim Pesan</CardTitle>
-                <CardDescription>
+                <CardTitle className="animate-in fade-in duration-700">Kirim Pesan</CardTitle>
+                <CardDescription className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
                   Isi formulir di bawah ini dan kami akan merespons secepatnya
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 {submitted && (
-                  <Alert variant="success" className="mb-4">
+                  <Alert variant="success" className="mb-4 animate-in fade-in slide-in-from-top-4 duration-500">
                     Pesan Anda telah terkirim. Kami akan menghubungi Anda segera!
                   </Alert>
                 )}
@@ -158,13 +160,13 @@ export function ContactPage() {
                     rows={6}
                   />
 
-                  <Button type="submit" className="w-full">
+                  <Button type="submit" className="w-full hover:shadow-lg hover:-translate-y-0.5 transition-all">
                     Kirim Pesan
                   </Button>
                 </form>
               </CardContent>
-            </Card>
-          </div>
+            </AnimatedCard>
+          </FadeIn>
         </div>
       </div>
     </div>

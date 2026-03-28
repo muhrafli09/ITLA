@@ -14,6 +14,8 @@ import {
   CheckCircle,
   AlertCircle,
 } from 'lucide-react';
+import { FadeIn } from '../../components/ui/FadeIn';
+import { AnimatedCounter } from '../../components/ui/AnimatedCounter';
 
 export function MemberDashboard() {
   const navigate = useNavigate();
@@ -67,10 +69,12 @@ export function MemberDashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground mt-1">Selamat datang, {user.name}</p>
-      </div>
+      <FadeIn>
+        <div>
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <p className="text-muted-foreground mt-1">Selamat datang, {user.name}</p>
+        </div>
+      </FadeIn>
 
       {/* Alert Status */}
       {isPending && (

@@ -4,10 +4,12 @@ import { Input, Textarea } from '../../components/design-system/Input';
 import { Button } from '../../components/design-system/Button';
 import { Alert } from '../../components/design-system/Alert';
 import { useAuth } from '../../lib/auth-context';
+import { CheckCircle } from 'lucide-react';
 
 export function MemberProfile() {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -24,7 +26,8 @@ export function MemberProfile() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsEditing(false);
-    alert('Profil berhasil diperbarui!');
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   return (
@@ -38,6 +41,13 @@ export function MemberProfile() {
           <Button onClick={() => setIsEditing(true)}>Edit Profil</Button>
         )}
       </div>
+
+      {showSuccess && (
+        <Alert variant="success">
+          <CheckCircle className="h-4 w-4 mr-2" />
+          Profil berhasil diperbarui!
+        </Alert>
+      )}
 
       <Card>
         <CardHeader>
@@ -149,7 +159,10 @@ export function MemberProfile() {
               type="password"
               placeholder="Konfirmasi kata sandi baru"
             />
-            <Button onClick={() => alert('Kata sandi berhasil diubah!')}>Simpan Kata Sandi Baru</Button>
+            <Button onClick={() => {
+              setShowSuccess(true);
+              setTimeout(() => setShowSuccess(false), 3000);
+            }}>Simpan Kata Sandi Baru</Button>
           </div>
         </CardContent>
       </Card>

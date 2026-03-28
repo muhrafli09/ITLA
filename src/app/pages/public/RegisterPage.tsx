@@ -116,16 +116,16 @@ export function RegisterPage() {
                 <Input
                   label="Pendidikan Terakhir"
                   name="education"
-                  placeholder="Contoh: S1 Sastra Inggris"
+                  placeholder="Contoh: S1 Pariwisata, D3 Perhotelan"
                   value={formData.education}
                   onChange={handleChange}
                   required
                 />
 
                 <Input
-                  label="Spesialisasi Terjemahan"
+                  label="Spesialisasi Tour Leader"
                   name="specialization"
-                  placeholder="Contoh: Terjemahan Teknis, Hukum, Medis"
+                  placeholder="Contoh: Wisata Budaya, Wisata Alam, City Tour"
                   value={formData.specialization}
                   onChange={handleChange}
                   required

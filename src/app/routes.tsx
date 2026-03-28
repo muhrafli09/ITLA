@@ -14,6 +14,7 @@ import { FAQPage } from './pages/public/FAQPage';
 import { AnnouncementsPage } from './pages/public/AnnouncementsPage';
 import { EventsPage } from './pages/public/EventsPage';
 import { ContactPage } from './pages/public/ContactPage';
+import { AboutPage } from './pages/public/AboutPage';
 
 // Member Pages
 import { MemberDashboard } from './pages/member/MemberDashboard';
@@ -23,6 +24,9 @@ import { SubmitLetter } from './pages/member/SubmitLetter';
 import { RenewMembership } from './pages/member/RenewMembership';
 import { MemberAnnouncements } from './pages/member/MemberAnnouncements';
 import { Forum } from './pages/member/Forum';
+import { RegisterEvent } from './pages/member/RegisterEvent';
+import { MemberDirectory } from './pages/member/MemberDirectory';
+import { Whitening } from './pages/member/Whitening';
 
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -32,6 +36,11 @@ import { ValidateLetter } from './pages/admin/ValidateLetter';
 import { ManageContent } from './pages/admin/ManageContent';
 import { UserManagement } from './pages/admin/UserManagement';
 import { ModerateForum } from './pages/admin/ModerateForum';
+import { ManageEvents } from './pages/admin/ManageEvents';
+import { ManageForum } from './pages/admin/ManageForum';
+import { ManageAnnouncements } from './pages/admin/ManageAnnouncements';
+import { ReviewWhitening } from './pages/admin/ReviewWhitening';
+import { SystemSettings } from './pages/admin/SystemSettings';
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +55,7 @@ export const router = createBrowserRouter([
       { path: 'pengumuman', Component: AnnouncementsPage },
       { path: 'event', Component: EventsPage },
       { path: 'kontak', Component: ContactPage },
+      { path: 'tentang', Component: AboutPage },
     ],
   },
   {
@@ -59,6 +69,9 @@ export const router = createBrowserRouter([
       { path: 'perpanjang', Component: RenewMembership },
       { path: 'pengumuman', Component: MemberAnnouncements },
       { path: 'forum', Component: Forum },
+      { path: 'daftar-kegiatan', Component: RegisterEvent },
+      { path: 'direktori', Component: MemberDirectory },
+      { path: 'pemutihan', Component: Whitening },
     ],
   },
   {
@@ -71,7 +84,12 @@ export const router = createBrowserRouter([
       { path: 'validasi-surat', Component: ValidateLetter },
       { path: 'kelola-konten', Component: ManageContent },
       { path: 'kelola-anggota', Component: UserManagement },
+      { path: 'kelola-forum', Component: ManageForum },
       { path: 'moderasi-forum', Component: ModerateForum },
+      { path: 'kelola-kegiatan', Component: ManageEvents },
+      { path: 'kelola-pengumuman', Component: ManageAnnouncements },
+      { path: 'tinjau-pemutihan', Component: ReviewWhitening },
+      { path: 'pengaturan-sistem', Component: SystemSettings },
     ],
   },
 ]);

@@ -13,7 +13,7 @@ export function Whitening() {
       </div>
 
       <Alert variant="info" title="Tentang Program Pemutihan">
-        Program pemutihan memungkinkan anggota yang keanggotaannya sudah tidak aktif untuk mengaktifkan kembali tanpa membayar tunggakan, dengan syarat tertentu.
+        Program pemutihan memungkinkan tour leader yang keanggotaannya sudah tidak aktif untuk mengaktifkan kembali tanpa membayar tunggakan, dengan syarat tertentu.
       </Alert>
 
       <Card>

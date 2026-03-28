@@ -14,6 +14,9 @@ import {
   Settings,
   Users,
   MessageSquare,
+  Calendar,
+  MessagesSquare,
+  ShieldAlert,
 } from 'lucide-react';
 import { useAuth } from '../../lib/auth-context';
 import { Button } from '../design-system/Button';
@@ -35,7 +38,10 @@ export function Sidebar({ type }: SidebarProps) {
     { to: '/anggota/ajukan-surat', icon: FileText, label: 'Ajukan Surat' },
     { to: '/anggota/perpanjang', icon: CreditCard, label: 'Perpanjang' },
     { to: '/anggota/pengumuman', icon: Bell, label: 'Pengumuman' },
+    { to: '/anggota/daftar-kegiatan', icon: Calendar, label: 'Daftar Kegiatan' },
     { to: '/anggota/forum', icon: MessageSquare, label: 'Forum Diskusi' },
+    { to: '/anggota/direktori', icon: Users, label: 'Direktori Tour Leader' },
+    { to: '/anggota/pemutihan', icon: ShieldAlert, label: 'Program Pemutihan' },
   ];
 
   const adminLinks = [
@@ -43,9 +49,14 @@ export function Sidebar({ type }: SidebarProps) {
     { to: '/admin/verifikasi-pendaftaran', icon: UserCheck, label: 'Verifikasi Pendaftaran' },
     { to: '/admin/validasi-pembayaran', icon: Wallet, label: 'Validasi Pembayaran' },
     { to: '/admin/validasi-surat', icon: FileCheck, label: 'Validasi Surat' },
+    { to: '/admin/tinjau-pemutihan', icon: ShieldAlert, label: 'Tinjau Pemutihan' },
     { to: '/admin/kelola-anggota', icon: Users, label: 'Kelola Anggota' },
+    { to: '/admin/kelola-kegiatan', icon: Calendar, label: 'Kelola Kegiatan' },
+    { to: '/admin/kelola-pengumuman', icon: Bell, label: 'Kelola Pengumuman' },
     { to: '/admin/kelola-konten', icon: Settings, label: 'Kelola Konten' },
-    { to: '/admin/moderasi-forum', icon: MessageSquare, label: 'Moderasi Forum' },
+    { to: '/admin/kelola-forum', icon: MessagesSquare, label: 'Kelola Forum' },
+    { to: '/admin/moderasi-forum', icon: ShieldAlert, label: 'Moderasi Forum' },
+    { to: '/admin/pengaturan-sistem', icon: Settings, label: 'Pengaturan Sistem' },
   ];
 
   const links = type === 'member' ? memberLinks : adminLinks;

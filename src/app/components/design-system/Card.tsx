@@ -1,13 +1,16 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  animated?: boolean;
+}
 
-export function Card({ className, ...props }: CardProps) {
+export function Card({ className, animated = true, ...props }: CardProps) {
   return (
     <div
       className={cn(
         'rounded-lg border border-border bg-card text-card-foreground shadow-sm',
+        animated && 'transition-all duration-300 ease-out hover:shadow-md hover:border-primary/50',
         className
       )}
       {...props}

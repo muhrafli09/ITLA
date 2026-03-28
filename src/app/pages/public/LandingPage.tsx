@@ -5,6 +5,12 @@ import { Button } from '../../components/design-system/Button';
 import { CheckCircle2, Users, FileText, Calendar, ArrowRight, ShieldCheck, Clock, ChevronRight } from 'lucide-react';
 import { announcements, events } from '../../lib/mock-data';
 import { formatDate } from '../../lib/utils';
+import { SlidingNumber } from '@/components/animate-ui/primitives/texts/sliding-number';
+import { FadeIn } from '../../components/ui/FadeIn';
+import { Typewriter } from '../../components/ui/Typewriter';
+import { AnimatedCard } from '../../components/ui/AnimatedCard';
+import { InstagramLogo } from '../../components/ui/InstagramLogo';
+import { RadialIntro } from '@/components/animate-ui/RadialIntro';
 
 export function LandingPage() {
   const navigate = useNavigate();
@@ -12,34 +18,43 @@ export function LandingPage() {
   const benefits = [
     {
       icon: CheckCircle2,
-      badge: "Resmi",
-      title: 'Sertifikat Keanggotaan',
-      description: 'Dapatkan sertifikat resmi sebagai anggota ITLA yang diakui secara nasional',
-    },
-    {
-      icon: FileText,
-      badge: "Kredibel",
-      title: 'Surat Rekomendasi',
-      description: 'Ajukan surat rekomendasi untuk keperluan visa, pekerjaan, atau kegiatan profesional',
+      badge: "Sertifikasi",
+      title: 'Sertifikasi & Pelatihan',
+      description: 'Program sertifikasi kompetensi sesuai standar BNSP untuk meningkatkan profesionalisme tour leader',
     },
     {
       icon: Users,
       badge: "Komunitas",
-      title: 'Networking & Forum',
-      description: 'Akses ke direktori anggota dan forum diskusi untuk memperluas jaringan',
+      title: 'Komunitas Profesional',
+      description: 'Bergabung dengan 427+ anggota aktif dan bangun jaringan dengan sesama profesional pariwisata',
     },
     {
       icon: Calendar,
-      badge: "Eksklusif",
-      title: 'Event & Pelatihan',
-      description: 'Diskon khusus untuk seminar, workshop, dan pelatihan resmi ITLA',
+      badge: "Event",
+      title: 'Event & Workshop',
+      description: 'Ikuti berbagai event, webinar, dan workshop untuk pengembangan pengetahuan dan keterampilan',
+    },
+    {
+      icon: FileText,
+      badge: "Digital",
+      title: 'Pustaka Digital',
+      description: 'Akses SOP, pedoman, studi kasus, dan riset terbaru untuk mendukung profesi Anda',
     },
   ];
 
-  const howItWorks = [
-    { step: '1', title: 'Pendaftaran Akun', time: '5 Menit', description: 'Isi formulir pendaftaran secara online dan lengkapi dokumen yang diperlukan dengan aman.' },
-    { step: '2', title: 'Proses Verifikasi', time: '1-2 Hari Kerja', description: 'Tim admin ITLA Pusat akan meninjau dan memverifikasi data serta kelengkapan dokumen Anda.' },
-    { step: '3', title: 'Keanggotaan Aktif', time: 'Instan', description: 'Setelah disetujui, akun Anda aktif dan dapat langsung menikmati seluruh manfaat layanan ITLA.' },
+  const partnerLogos = [
+    { id: 1, name: 'Kemenparekraf', src: '/Kemenparekraf.png' },
+    { id: 2, name: 'Kemenaker', src: '/Kemenaker.png' },
+    { id: 3, name: 'Kemenlu', src: '/Kemenlu.svg' },
+    { id: 4, name: 'BNSP', src: '/BNSP.png' },
+    { id: 5, name: 'Poltekpar NHI', src: '/Poltekpar%20NHI.webp' },
+    { id: 6, name: 'Politeknik Bandung', src: '/Politeknik%20Bandung.png' },
+    { id: 7, name: 'STIEPAR YAPARI', src: '/STIEPAR%20YAPARI.webp' },
+    { id: 8, name: 'ASITA', src: '/Asita.webp' },
+    { id: 9, name: 'GIPI', src: '/Gipi.jpg' },
+    { id: 10, name: 'HPI', src: '/HPI.webp' },
+    { id: 11, name: 'ASPPI', src: '/ASPPI.png' },
+    { id: 12, name: 'ASTINDO', src: '/Astindo.png' },
   ];
 
   return (
@@ -56,63 +71,83 @@ export function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-left space-y-8">
-              <div className="flex items-center gap-4 mb-6">
-                <img src="/logo.png" alt="ITLA Logo" className="h-16 w-auto" />
-              </div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                <span>Integrity – Transparency – Loyalty – Accountability</span>
-              </div>
+              <FadeIn delay={0} direction="up" className="flex items-center gap-4 mb-6">
+                <img src="/logo.png" alt="ITLA Logo" className="h-16 w-auto animate-in fade-in zoom-in duration-700" />
+              </FadeIn>
+              <FadeIn delay={300} direction="up">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium animate-pulse">
+                  <span>Integrity – Transparency – Loyalty – Accountability</span>
+                </div>
+              </FadeIn>
 
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
-                  Indonesia Tour Leader Association <br />
-                  <span className="text-primary">ITLA</span>
+                  <Typewriter 
+                    text="Wadah Insan TOUR LEADER Profesional Indonesia" 
+                    delay={500}
+                    speed={80}
+                  />
                 </h1>
-                <p className="text-lg md:text-xl text-slate-600 max-w-[600px] leading-relaxed">
-                  Rumah bersama bagi para tour leader dari seluruh penjuru Indonesia dan mancanegara untuk tumbuh, berbagi, dan berkontribusi bagi pariwisata yang berkualitas dan berkelanjutan.
-                </p>
+                <FadeIn delay={2000} direction="up">
+                  <p className="text-lg md:text-xl text-slate-600 max-w-[600px] leading-relaxed">
+                    ITLA adalah badan profesional pertama dan utama untuk pemimpin perjalanan wisata di Indonesia. Kami berdedikasi untuk meningkatkan standar industri pariwisata melalui pendidikan, pelatihan, advokasi, dan kolaborasi.
+                  </p>
+                </FadeIn>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button
-                  size="lg"
-                  onClick={() => navigate('/daftar')}
-                  className="h-14 px-8 text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5"
-                >
-                  Daftar Anggota
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Button>
-              </div>
+              <FadeIn delay={2500} direction="up">
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button
+                    size="lg"
+                    onClick={() => navigate('/daftar')}
+                    className="h-14 px-8 text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5 relative overflow-hidden group"
+                  >
+                    <span className="relative z-10 flex items-center">Daftar Anggota
+                    <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" /></span>
+                    <div className="absolute inset-0 bg-primary/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => navigate('/event')}
+                    className="h-14 px-8 text-base font-semibold hover:bg-primary/5 transition-colors"
+                  >
+                    Lihat Event
+                  </Button>
+                </div>
+              </FadeIn>
 
               {/* Trust Indicators */}
-              <div className="flex items-center gap-6 pt-6 border-t border-border/50">
-                <div className="flex items-center gap-2">
-                  <div className="text-sm font-medium text-slate-600">
-                    <span className="text-slate-900 font-bold">1.000+</span> Anggota Terdaftar
+              <FadeIn delay={3000} direction="up">
+                <div className="flex items-center gap-6 pt-6 border-t border-border/50 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm font-medium text-slate-600">
+                      <span className="text-slate-900 font-bold"><SlidingNumber number={427} inView inViewOnce />+</span> Anggota Aktif
+                    </div>
+                  </div>
+                  <div className="w-1 h-1 rounded-full bg-slate-300" />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold text-slate-900 flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-green-600 animate-pulse" /> Sertifikasi BNSP</span>
+                    <span className="text-xs text-slate-500">Event Rutin & Kemitraan Strategis</span>
                   </div>
                 </div>
-                <div className="w-1 h-1 rounded-full bg-slate-300" />
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold text-slate-900 flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-green-600" /> Terverifikasi</span>
-                  <span className="text-xs text-slate-500">Proses Cepat & Resmi</span>
-                </div>
-              </div>
+              </FadeIn>
             </div>
 
             {/* Right Content - Visual */}
-            <div className="relative hidden lg:block">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-slate-200/50 border border-slate-100 bg-white p-2">
+            <FadeIn delay={1000} direction="right" className="relative hidden lg:block">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-slate-200/50 border border-slate-100 bg-white p-2 animate-in fade-in zoom-in duration-700">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-50 z-10 rounded-2xl" />
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+                  src="/hero-image.jpg"
                   alt="Kegiatan Profesional"
                   className="w-full h-auto rounded-xl object-cover object-center relative z-0 aspect-[4/3]"
                 />
 
                 {/* Floating Element */}
-                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-border/50 z-20 flex items-center gap-4 transition-transform hover:-translate-y-1">
+                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-border/50 z-20 flex items-center gap-4 transition-all hover:-translate-y-1 hover:shadow-2xl animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
                   <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                    <CheckCircle2 className="w-6 h-6" />
+                    <CheckCircle2 className="w-6 h-6 animate-pulse" />
                   </div>
                   <div>
                     <div className="text-sm font-bold text-slate-900">100% Kredibel</div>
@@ -120,7 +155,7 @@ export function LandingPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -128,70 +163,84 @@ export function LandingPage() {
       {/* Benefits Section */}
       <section className="py-24 bg-[#F8F9FA]">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">Manfaat Menjadi Anggota</h2>
+          <FadeIn delay={100} direction="up" className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">Layanan & Keuntungan</h2>
             <p className="text-slate-600 text-lg">
-              Bergabunglah bersama kami dan nikmati berbagai fasilitas eksklusif untuk mendukung karir profesional Anda.
+              Mengapa Bergabung dengan ITLA - ITLA menyediakan berbagai layanan dan keuntungan untuk meningkatkan kompetensi dan profesionalisme tour leader Indonesia.
             </p>
-          </div>
+          </FadeIn>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <Card key={index} className="bg-white border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden rounded-xl border">
+                <AnimatedCard key={index} delay={index * 150} direction="up" className="bg-white border-slate-100 shadow-sm group overflow-hidden rounded-xl border hover:shadow-xl transition-all">
                   <CardContent className="p-8">
                     <div className="flex justify-between items-start mb-6">
-                      <div className="h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-inner">
+                      <div className="h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-inner group-hover:shadow-lg group-hover:scale-110">
                         <Icon className="h-7 w-7" />
                       </div>
                       <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                         {benefit.badge}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3">{benefit.title}</h3>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">{benefit.title}</h3>
                     <p className="text-base text-slate-600 leading-relaxed">{benefit.description}</p>
                   </CardContent>
-                </Card>
+                </AnimatedCard>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-24 bg-white border-y border-border/40">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center max-w-2xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">Cara Bergabung</h2>
+          <FadeIn delay={100} direction="up" className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">Dipercaya oleh Institusi & Asosiasi</h2>
             <p className="text-slate-600 text-lg">
-              Tiga langkah sederhana untuk menjadi bagian dari keanggotaan Ikatan Penerjemah Indonesia.
+              ITLA Pusat bangga menjalin kerjasama dengan berbagai institusi pemerintah, pendidikan, dan asosiasi industri pariwisata.
             </p>
+          </FadeIn>
+
+          <div className="flex justify-center">
+            <RadialIntro orbitItems={partnerLogos} stageSize={500} imageSize={70} />
           </div>
 
-          <div className="relative max-w-5xl mx-auto">
-            {/* Horizontal Connector Line (Hidden on mobile) */}
-            <div className="hidden md:block absolute top-[44px] left-[15%] right-[15%] h-[2px] bg-slate-100">
-              <div className="absolute top-0 left-0 h-full bg-primary/30 w-full" />
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-12 relative">
-              {howItWorks.map((item, index) => (
-                <div key={item.step} className="relative z-10 flex flex-col items-center text-center group mt-8 md:mt-0">
-                  <div className="w-24 h-24 rounded-full bg-white border-4 border-slate-50 shadow-lg shadow-slate-200/50 flex items-center justify-center text-3xl font-black text-slate-300 mb-6 group-hover:border-primary group-hover:text-primary transition-all duration-300">
-                    {item.step}
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full mb-4 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                    <Clock className="w-3.5 h-3.5" />
-                    {item.time}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-                  <p className="text-base text-slate-600 leading-relaxed max-w-[280px]">
-                    {item.description}
-                  </p>
+          {/* Stats */}
+          <div className="grid md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-border/40">
+            <FadeIn delay={100} direction="up">
+              <div className="text-center p-6 rounded-lg bg-slate-50 border border-slate-100 transition-all hover:shadow-md hover:bg-white hover:scale-105 group">
+                <div className="text-4xl font-bold text-primary mb-2 group-hover:text-primary/80 transition-colors">
+                  <SlidingNumber number={427} inView inViewOnce />+
                 </div>
-              ))}
-            </div>
+                <div className="text-sm text-slate-600 font-medium">Anggota Aktif</div>
+              </div>
+            </FadeIn>
+            <FadeIn delay={200} direction="up">
+              <div className="text-center p-6 rounded-lg bg-slate-50 border border-slate-100 transition-all hover:shadow-md hover:bg-white hover:scale-105 group">
+                <div className="text-4xl font-bold text-primary mb-2 group-hover:text-primary/80 transition-colors">
+                  <SlidingNumber number={6} inView inViewOnce />
+                </div>
+                <div className="text-sm text-slate-600 font-medium">Event Bulan Ini</div>
+              </div>
+            </FadeIn>
+            <FadeIn delay={300} direction="up">
+              <div className="text-center p-6 rounded-lg bg-slate-50 border border-slate-100 transition-all hover:shadow-md hover:bg-white hover:scale-105 group">
+                <div className="text-4xl font-bold text-primary mb-2 group-hover:text-primary/80 transition-colors">
+                  <SlidingNumber number={1300} inView inViewOnce />+
+                </div>
+                <div className="text-sm text-slate-600 font-medium">Sertifikat Terbit</div>
+              </div>
+            </FadeIn>
+            <FadeIn delay={400} direction="up">
+              <div className="text-center p-6 rounded-lg bg-slate-50 border border-slate-100 transition-all hover:shadow-md hover:bg-white hover:scale-105 group">
+                <div className="text-4xl font-bold text-primary mb-2 group-hover:text-primary/80 transition-colors">
+                  <SlidingNumber number={2009} inView inViewOnce />
+                </div>
+                <div className="text-sm text-slate-600 font-medium">Tahun Berdiri</div>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -199,20 +248,20 @@ export function LandingPage() {
       {/* Announcements Section */}
       <section className="py-24 bg-[#F8F9FA]">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
+          <FadeIn delay={100} direction="up" className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Pengumuman Terbaru</h2>
-              <p className="text-slate-600">Berita dan pembaruan terkini dari portal resmi ITLA Pusat.</p>
+              <p className="text-slate-600">Berita dan pembaruan terkini dari ITLA Pusat.</p>
             </div>
             <Button variant="outline" className="group border-slate-300" onClick={() => navigate('/pengumuman')}>
               Lihat Semua Pengumuman
               <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
             </Button>
-          </div>
+          </FadeIn>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {announcements.map((announcement) => (
-              <Card key={announcement.id} className="bg-white border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden group cursor-pointer flex flex-col border" onClick={() => navigate('/pengumuman')}>
+            {announcements.map((announcement, index) => (
+              <AnimatedCard key={announcement.id} delay={index * 150} direction="up" className="bg-white border-slate-100 shadow-sm rounded-xl overflow-hidden group cursor-pointer flex flex-col border" onClick={() => navigate('/pengumuman')}>
                 <CardHeader className="bg-white border-b border-slate-50 pb-4">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-bold tracking-wider uppercase text-primary bg-primary/10 px-3 py-1 rounded-md">
@@ -231,7 +280,7 @@ export function LandingPage() {
                     {announcement.excerpt}
                   </CardDescription>
                 </CardContent>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -240,7 +289,7 @@ export function LandingPage() {
       {/* Events Section */}
       <section className="py-24 bg-white border-t border-border/40">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
+          <FadeIn delay={100} direction="up" className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Event Mendatang</h2>
               <p className="text-slate-600">Jadwal kegiatan resmi untuk anggota</p>
@@ -249,11 +298,11 @@ export function LandingPage() {
               Lihat Semua Event
               <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
             </Button>
-          </div>
+          </FadeIn>
 
           <div className="space-y-6">
-            {events.map((event) => (
-              <Card key={event.id} className="bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl group overflow-hidden">
+            {events.map((event, index) => (
+              <AnimatedCard key={event.id} delay={index * 200} direction="left" className="bg-white border border-slate-100 shadow-sm rounded-xl group overflow-hidden">
                 <CardHeader className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div className="flex-1">
@@ -272,7 +321,7 @@ export function LandingPage() {
                     )}
                   </div>
                 </CardHeader>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -285,55 +334,62 @@ export function LandingPage() {
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-6">
                 <img src="/logo.png" alt="ITLA Logo" className="h-12 w-auto" />
-                <h4 className="font-bold text-xl tracking-tight">ITLA Pusat</h4>
+                <div>
+                  <h4 className="font-bold text-xl tracking-tight">ITLA</h4>
+                  <p className="text-sm text-slate-400">Pusat</p>
+                </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-                Platform resmi Ikatan Penerjemah Indonesia untuk layanan keanggotaan dan informasi kegiatan secara nasional.
+                Indonesian Tour Leaders Association - Wadah profesional tour leader Indonesia.
               </p>
+              <div className="flex items-center gap-4 pt-4">
+                <InstagramLogo size={40} />
+              </div>
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-6 text-white tracking-tight">Navigasi Utama</h4>
+              <h4 className="font-bold text-lg mb-6 text-white tracking-tight">Tautan</h4>
               <ul className="space-y-3 text-sm text-slate-400">
-                <li><a href="/pengumuman" className="hover:text-white hover:translate-x-1 transition-all inline-block">Pengumuman & Berita</a></li>
-                <li><a href="/event" className="hover:text-white hover:translate-x-1 transition-all inline-block">Jadwal Event</a></li>
-                <li><a href="/kontak" className="hover:text-white hover:translate-x-1 transition-all inline-block">Hubungi Kami</a></li>
-                <li><a href="/faq" className="hover:text-white hover:translate-x-1 transition-all inline-block">Pusat Bantuan (FAQ)</a></li>
+                <li><a href="/tentang" className="hover:text-white hover:translate-x-1 transition-all inline-block">Tentang Kami</a></li>
+                <li><a href="/program" className="hover:text-white hover:translate-x-1 transition-all inline-block">Program</a></li>
+                <li><a href="/event" className="hover:text-white hover:translate-x-1 transition-all inline-block">Event</a></li>
+                <li><a href="/pengumuman" className="hover:text-white hover:translate-x-1 transition-all inline-block">Berita</a></li>
+                <li><a href="/kerjasama" className="hover:text-white hover:translate-x-1 transition-all inline-block">Kerjasama</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-6 text-white tracking-tight">Layanan Anggota</h4>
+              <h4 className="font-bold text-lg mb-6 text-white tracking-tight">Layanan</h4>
               <ul className="space-y-3 text-sm text-slate-400">
-                <li><a href="/daftar" className="hover:text-white hover:translate-x-1 transition-all inline-block">Pendaftaran Baru</a></li>
-                <li><a href="/masuk" className="hover:text-white hover:translate-x-1 transition-all inline-block">Login Portal</a></li>
-                <li><a href="/status-pendaftaran" className="hover:text-white hover:translate-x-1 transition-all inline-block">Cek Status Registrasi</a></li>
+                <li><a href="/sertifikasi" className="hover:text-white hover:translate-x-1 transition-all inline-block">Sertifikasi</a></li>
+                <li><a href="/pelatihan" className="hover:text-white hover:translate-x-1 transition-all inline-block">Pelatihan</a></li>
+                <li><a href="/pustaka" className="hover:text-white hover:translate-x-1 transition-all inline-block">Pustaka Digital</a></li>
+                <li><a href="/forum" className="hover:text-white hover:translate-x-1 transition-all inline-block">Forum Komunitas</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-6 text-white tracking-tight">Kontak Resmi</h4>
+              <h4 className="font-bold text-lg mb-6 text-white tracking-tight">Kontak</h4>
               <ul className="space-y-4 text-sm text-slate-400">
                 <li className="flex items-start gap-3">
                   <div className="mt-1 bg-white/10 p-1.5 rounded-md"><FileText className="w-4 h-4 text-white" /></div>
                   <div>
-                    <div className="text-white font-medium mb-0.5">Email</div>
-                    <span>info@itla.id</span>
+                    <div className="text-white font-medium mb-0.5">Alamat</div>
+                    <span>Jl. Anyer No. 10, Kebon Waru, Kec. Batununggal, Kota Jakarta</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-1 bg-white/10 p-1.5 rounded-md"><ShieldCheck className="w-4 h-4 text-white" /></div>
                   <div>
-                    <div className="text-white font-medium mb-0.5">Telepon</div>
-                    <span>(021) 1234-5678</span>
+                    <div className="text-white font-medium mb-0.5">Kontak</div>
+                    <span>(021) 1234-5678</span><br/>
+                    <span>info@itla.or.id</span>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-slate-500">
-            <p>© {new Date().getFullYear()} ITLA Pusat. Hak cipta dilindungi.</p>
+            <p>© 2009-{new Date().getFullYear()} Indonesian Tour Leaders Association - ITLA Pusat. All rights reserved.</p>
             <div className="flex gap-4 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
-              <span className="text-slate-700">|</span>
-              <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+              <span className="text-white font-medium">Integrity – Transparency – Loyalty – Accountability</span>
             </div>
           </div>
         </div>
